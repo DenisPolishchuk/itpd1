@@ -1,0 +1,67 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  // Ввод размеров галявины
+  int x = 6;
+  int y = 4;
+
+  // Находим количество квадратов в галявине
+  int n = x * y;
+
+  // Создаем массив, который будет хранить информацию о том, какие квадраты
+  // должны быть огорожены
+  bool ogradka[n];
+
+  // Заполняем массив оградкой
+  for (int i = 0; i < n; i++) {
+    ogradka[i] = false;
+  }
+
+  // Ввод длины оградки
+  int doroga;
+  cout << "Введите длину оградки: ";
+  cin >> doroga;
+
+  // Находим первый квадрат, который нужно оградить
+  int i = 0;
+  while (ogradka[i]) {
+    i++;
+  }
+
+  // Наращиваем оградку спиралью
+  for (int j = 1; j <= n; j++) {
+    // Огораживаем квадрат
+    ogradka[i] = true;
+
+    // Находим следующий квадрат
+    i = (i + j) % n;
+
+    // Проверяем, соответствует ли квадрат условию
+    if (i % x == 0  i % y == 0  i % (x * y) == 0) {
+      ogradka[i] = true;
+    } else if (i % x == 1 && i % y == 1) {
+      ogradka[i] = true;
+    } else if (i % x == x - 2 && i % y == 1) {
+      ogradka[i] = true;
+    } else if (i % x == 1 && i % y == y - 2) {
+      ogradka[i] = true;
+    } else if (i % x == x - 2 && i % y == y - 2) {
+      ogradka[i] = true;
+    }
+  }
+
+  // Находим длину оградки
+  int doroga_real = 0;
+  for (int i = 0; i < n; i++) {
+    if (ogradka[i]) {
+      doroga_real++;
+    }
+  }
+
+  // Выводим результат
+  cout << "Длина оградки: " << doroga_real << endl;
+
+  return 0;
+}
